@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+    <title>Bedu Django</title>
+  </head>
+  <body>
+    {% if message %}
+    <h1>{{ message }}</h1>
+    {% endif %}
+
+    <form action="{% url 'accounts:login' %}" method="POST">
+      {% csrf_token %}
+      <p>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+      </p>
+      <button type="submit">¡Iniciar sesión!</button>
+    </form>
+  </body>
+</html>

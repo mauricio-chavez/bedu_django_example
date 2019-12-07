@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      h1,
+      p, a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+    <title>Bedu Django</title>
+  </head>
+  <body>
+    <h1>Perfil</h1>
+
+    {% if request.user.is_authenticated %}
+      <p>{{ request.user.username }}</p>
+      <p>{{ request.user.email }}</p>
+      <a href="{% url 'accounts:logout' %}">
+        <button>Cerrar sesión</button>
+      </a>
+    {% else %}
+      <p>Primero inicia sesión</p>
+    {% endif %}
+  </body>
+</html>
