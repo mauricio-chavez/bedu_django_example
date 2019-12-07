@@ -2,14 +2,19 @@
 
 from django.urls import path
 
-from .views import sign_in, perfil, signoff, signup, nombre
+from rest_framework import routers
+
+from . import views
 
 
 app_name = 'accounts'
+
 urlpatterns = [
-    path('<int:id>/', nombre, name='nombre'),
-    path('login/', sign_in, name='login'),
-    path('profile/', perfil, name='profile'),
-    path('logout/', signoff, name='logout'),
-    path('signup/', signup, name='signup'),
+    path('<int:id>/', views.nombre, name='nombre'),
+    path('login/', views.signin, name='login'),
+    path('login-class/', views.LoginView.as_view(), name='login_class'),
+    path('profile/', views.perfil, name='profile'),
+    path('logout/', views.signoff, name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('signup-class/', views.SignupView.as_view(), name='signup_class'),
 ]

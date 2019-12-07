@@ -4,11 +4,40 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+from django.views.generic import FormView
+
+
+from rest_framework import viewsets
 
 from .forms import SignupForm
+from .serializers import UserSerializer
 
 
-def sign_in(request):
+class LoginView(auth_views.LoginView):
+    template_name = 'accounts/login.html'
+    redirect_field_name = reverse_lazy('accounts:profile')
+
+
+class SignupView(FormView):
+    form_class = SignupForm
+    success_url = reverse_lazy('accounts:profile')
+    template_name = 'accounts/signup.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
+
+
+class UserViewset(viewsets.ModelViewSet):
+    """User viewset"""
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+def signin(request):
     if request.method == 'GET':
         return render(request, 'accounts/login.html')
     elif request.method == 'POST':

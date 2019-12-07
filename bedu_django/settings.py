@@ -24,11 +24,12 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
-    'accounts'
+    'accounts',
+    'cats',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -110,3 +111,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
+
+
+# Django Rest Framework
+
+REST_FRAMEWORK = {
+
+}
